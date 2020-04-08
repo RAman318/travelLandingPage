@@ -149,7 +149,7 @@ let info = document.querySelector('.info-header'),
 
         let request = new XMLHttpRequest();
             
-            request.open('POST', 'server.php');
+            request.open('POST', 'https://github.com/RAman318/travelLandingPage/blob/master/server.php');
             request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         let formModData = new FormData(formMod);
@@ -176,7 +176,7 @@ let info = document.querySelector('.info-header'),
         formContact.appendChild(statusMessag);
 
     let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
+        request.open('POST', 'https://github.com/RAman318/travelLandingPage/blob/master/server.php');
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     let formContactData = new FormData(formContact);
