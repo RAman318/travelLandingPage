@@ -82,6 +82,128 @@ let info = document.querySelector('.info-header'),
     }
 
     setClock('timer', deadline);
+   
+   // Modal:
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close');
+
+    more.addEventListener('click', function() {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    });
+
+    close.addEventListener('click', function() {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+        statusMessag.innerText = '';
+    });
+
+    let moreInfo = document.querySelector('.info'),
+       infoBtn = document.querySelectorAll('.description-btn');
+
+    function showMoreInfo() {
+        overlay.style.display = 'block';
+        //this.classList.add('more-splash');
+    }
+
+    //let shM = showMoreInfo.bind(overlay);
+
+    moreInfo.addEventListener('click', function(event) {
+        let target = event.target;
+
+        if(target && target.classList.contains('description-btn')) {
+                for(let i = 0; i < infoBtn.length; i++) {
+                    if(target == infoBtn[i]) {
+                        showMoreInfo();
+                        //shM();
+                        break;
+                    }
+                }
+        }
+    });
+
+    // Forms:
+
+    let message = {
+        loading: 'Загружаем...',
+        success: 'Благодарим! Мы свяжемся с вами в ближайшее время!',
+        failure: 'Упсс! Что то пошло не так(('
+    };
+
+    let formMod = document.querySelector('.main-form'),
+       inputMod = formMod.getElementsByTagName('input'),
+       statusMessag = document.createElement('div'),
+
+       formContact = document.getElementById('form'),
+       inputContact = formContact.getElementsByTagName('input');
+
+       statusMessag.classList.add('status');
+
+    formMod.addEventListener('submit', function(event) {
+        event.preventDefault();
+        formMod.appendChild(statusMessag);
+
+        let request = new XMLHttpRequest();
+            
+            request.open('POST', 'server.php');
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        let formModData = new FormData(formMod);
+               request.send(formModData);
+
+        request.addEventListener('readystatechange', function() {
+            if(request.readyState < 4) {
+                statusMessag.innerText = message.loading;
+            } else if(request.readyState === 4 && request.status == 200) {
+                statusMessag.innerText = message.success;
+            } else {
+                statusMessag.innerText = message.failure;
+            }
+        });
+
+         for(let i = 0; i < inputMod.length; i++) {
+             inputMod[i].value = '';
+         }
+
+    });
+
+    formContact.addEventListener('submit', function(event) {
+        event.preventDefault();
+        formContact.appendChild(statusMessag);
+
+    let request = new XMLHttpRequest();
+        request.open('POST', 'server.php');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    let formContactData = new FormData(formContact);
+        request.send(formContactData);
+
+    request.addEventListener('readystatechange', function() {
+        if(request.readyState < 4) {
+            statusMessag.innerText = message.loading;
+        } else if(request.readyState === 4 && request.status == 200) {
+            statusMessag.innerText = message.success;
+        } else {
+            statusMessag.innerText = message.failure;
+        }
+      });
+
+      for(let i = 0; i < inputContact.length; i++) {
+          inputContact[i].value = '';
+      }
+
+    });
+
+    let contactForm = document.querySelector('.contact-form');
+
+    contactForm.addEventListener('click', function() {
+       statusMessag.innerText = '';
+   });
+
 
 });
 
