@@ -131,7 +131,7 @@ let info = document.querySelector('.info-header'),
     let message = {
         loading: 'Загружаем...',
         success: 'Благодарим! Мы свяжемся с вами в ближайшее время!',
-        failure: 'Упсс! Что то пошло не так(('
+        failure: 'Это демонстрационный сайт, он не подключен к базе данных'
     };
 
     let formMod = document.querySelector('.main-form'),
