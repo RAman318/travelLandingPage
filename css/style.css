@@ -529,10 +529,10 @@ header ul li:before {
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.8);
 }
 .content .contact-img {
-  width: 50%;
+  width: 20%;
 }
 .content .contact-img img {
-  height: 550px;
+  height: 350px;
   -webkit-transform: translateY(-13%);
       -ms-transform: translateY(-13%);
           transform: translateY(-13%);
