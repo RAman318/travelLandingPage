@@ -203,6 +203,61 @@ let info = document.querySelector('.info-header'),
     contactForm.addEventListener('click', function() {
        statusMessag.innerText = '';
    });
+   
+   // Slader
+   
+   let sliderIndex = 1,
+        sliderWrep = document.querySelector('.wrap'),
+        sliderItem = document.querySelectorAll('.slider-item'),
+              prev = document.querySelector('.prev'),
+              next = document.querySelector('.next'),
+          dotsWrep = document.querySelector('.slider-dots'),
+              dots = document.querySelectorAll('.dot');
+
+        showSlider(sliderIndex);
+        
+        function showSlider(n) {
+
+            if(n > sliderItem.length) {
+               sliderIndex = 1;
+            }
+            if(n < 1) {
+                sliderIndex = sliderItem.length;
+            }
+
+            sliderItem.forEach((item) => item.style.display = 'none');
+
+            dots.forEach((item) => item.classList.remove('dot-active'));
+
+            sliderItem[sliderIndex - 1].style.display = 'block';
+            dots[sliderIndex - 1].classList.add('dot-active');
+        }
+
+        function plusSlide(n) {
+            showSlider(sliderIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlider(sliderIndex = n);
+        }
+
+        prev.addEventListener('click', function() {
+            plusSlide(-1);
+        });
+
+        next.addEventListener('click', function() {
+            plusSlide(1);
+        });
+
+        dotsWrep.addEventListener('click', function(event) {
+            let cl = event.target;
+            
+            for(let i = 0; i < dots.length + 1; i++) {
+                if(cl.classList.contains('dot') && cl == dots[i-1]) {
+                    currentSlide(i);
+                }
+            }
+        });
 
 
 });
