@@ -258,6 +258,53 @@ let info = document.querySelector('.info-header'),
                 }
             }
         });
+   
+   // Calculater
+   
+   let persons = document.querySelectorAll('.counter-block-input')[0],
+       restDays = document.querySelectorAll('.counter-block-input')[1],
+       place = document.getElementById('select'),
+       totalValue = document.getElementById('total'),
+       personSum = 0,
+       daySum = 0,
+       totalSum = 0,
+       index = place.options[place.selectedIndex].value;
+
+       totalValue.textContent = 0;
+
+       persons.addEventListener('input', function() {
+              personSum = +this.value;
+              //let index = place.options[place.selectedIndex].value;
+            if(restDays.value == '' || persons.value == '') {
+                totalValue.textContent = 0;
+                totalSum = 0;
+            } else {
+                totalSum = (personSum + daySum) * 5000 * index; //place.options[place.selectedIndex].value;
+                totalValue.textContent = totalSum;
+            }
+       });
+
+       restDays.addEventListener('input', function() {
+               daySum = +this.value;
+               //let index = place.options[place.selectedIndex].value;
+            if(persons.value == '' || restDays.value == '') {
+                totalValue.textContent = 0;
+                totalSum = 0;
+            } else {
+                totalSum = (personSum + daySum) * 5000 * index; //place.options[place.selectedIndex].value;
+                totalValue.textContent = totalSum;
+            }
+       });
+
+       place.addEventListener('change', function() {
+           if(persons.value == '' && restDays.value == '') {
+                totalValue.textContent = 0;
+            } else {
+               let a = totalSum;
+
+               totalValue.textContent = a * this.options[this.selectedIndex].value;
+           }
+       });
 
 
 });
